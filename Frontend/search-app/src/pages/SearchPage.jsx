@@ -114,9 +114,12 @@ export default function SearchPage() {
             <div key={index} className="card p-3 mt-3">
               <h5>📜 Document: {doc._id}</h5>
               <p>
-                <strong>📂 Folder:</strong> {doc._source.folder_name}
+                <strong>  📂 Folder:</strong> {doc._source.folder_name}
               </p>
-              <h6>📌 Attribute:</h6>
+              <p>
+                <strong>  🔹 Content:</strong> {doc._source.content}
+              </p>
+              <h6>  📌 Attribute:</h6>
               <ul>
                 {doc._source.attributes.map((attr, i) => (
                   <li key={i}>
