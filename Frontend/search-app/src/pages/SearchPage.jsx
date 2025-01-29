@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -45,21 +45,6 @@ export default function SearchPage() {
     }
   };
 
-  const getFolders = async () => {
-    try {
-        const response = await axios.get("http://localhost:8000/folders");
-        setFolders(response.data);
-        } catch (error) {
-        console.error("Error fetching folders", error);
-        }
-}
-
-useEffect(() => {
-    if (query) {
-        handleSearch();
-        }
-}, [query]);
-
   return (
     <div className="container mt-5">
       <h1 className="text-center">🔍 Searches</h1>
@@ -83,14 +68,14 @@ useEffect(() => {
           className="form-select my-3"
           onChange={(e) => setFolder(e.target.value)}
         >
-          <option value="">Pick up a folder</option>
+          <option value="">Folder</option>
           {folders.map((f) => (
             <option key={f} value={f}>
               {f}
             </option>
           ))}
         </select>
-        <h5>Filter by attributes</h5>
+        <h5>Attribute filter</h5>
         {attributes.map((attr, index) => (
           <div key={index} className="row mb-2">
             <div className="col">
@@ -121,13 +106,13 @@ useEffect(() => {
         </button>
       </div>
       <div className="mt-4">
-        <h2>Results</h2>
+        <h2>📄 Results</h2>
         {results.length === 0 ? (
-          <p>No results.</p>
+          <p>Did not find any documents.</p>
         ) : (
           results.map((doc, index) => (
             <div key={index} className="card p-3 mt-3">
-              <h5>📜 Doc: {doc._id}</h5>
+              <h5>📜 Document: {doc._id}</h5>
               <p>
                 <strong>📂 Folder:</strong> {doc._source.folder_name}
               </p>
